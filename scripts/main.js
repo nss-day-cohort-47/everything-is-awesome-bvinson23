@@ -67,14 +67,13 @@ const idFilter = (searchValue) => {
 		if (singleLego.LegoId === searchValue) {
 			return singleLego;
 		}
-		else {
-			const notFound = "Not a valid Lego Id";
-			return notFound;
-		} 
 	})
-	makeLegoList(filterArray);
+	if (filterArray.length > 0) {
+		makeLegoList(filterArray)
+	} else {
+		document.getElementById("all-legos").innerHTML = "<p>Not a valid Lego Id</p>"
+	}
 }
-
 // function to boot up the lego site
 const startEIA = () => {
 	loadLegos()
