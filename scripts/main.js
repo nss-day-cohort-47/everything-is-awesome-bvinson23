@@ -31,6 +31,16 @@ navElement.addEventListener("change", (event) => {
 	}
 })
 
+// event listener for filter with search bar
+navElement.addEventListener("keypress", (event) => {
+	if (event.key === 'Enter' && event.target.id === 'legoSearch') {
+		const legoValue = document.querySelector("input[name='legoSearch']").value
+		idFilter(legoValue);
+	} else if (event.target.id === "showAll") {
+		makeLegoList(useLegos())
+	}
+})
+
 // function to filter for certain color legos
 const filterLegos = (whatFilter) => {
 	const filterArray = useLegos().filter(singleLego => {
@@ -51,6 +61,19 @@ const materialFilter = (whatFilter) => {
 	makeLegoList(filterArray);
 }
 
+// function for search bar
+const idFilter = (searchValue) => {
+	const filterArray = useLegos().filter(singleLego => {
+		if (singleLego.LegoId === searchValue) {
+			return singleLego;
+		}
+	})
+	if (filterArray.length > 0) {
+		makeLegoList(filterArray)
+	} else {
+		document.getElementById("all-legos").innerHTML = "<p>Not a valid Lego Id</p>"
+	}
+}
 // function to boot up the lego site
 const startEIA = () => {
 	loadLegos()
