@@ -4,6 +4,7 @@ import { makeLegoList } from './legos/LegoList.js';
 
 const navElement = document.querySelector("nav");
 
+// event listener for filter of Red legos
 navElement.addEventListener("click", (event) => {
 	if (event.target.id === "showRed") {
 		filterLegos("Red")
@@ -12,6 +13,16 @@ navElement.addEventListener("click", (event) => {
 	}
 })
 
+// event listener for filter of Green legos
+navElement.addEventListener("click", (event) => {
+	if (event.target.id === "showGreen") {
+		filterLegos("Green")
+	} else if (event.target.id === "showAll") {
+		makeLegoList(useLegos())
+	}
+})
+
+// function to filter for certain color legos
 const filterLegos = (whatFilter) => {
 	const filterArray = useLegos().filter(singleLego => {
 		if (singleLego.LegoName.includes(whatFilter)) {
@@ -21,7 +32,7 @@ const filterLegos = (whatFilter) => {
 	makeLegoList(filterArray);
 }
 
-
+// function to boot up the lego site
 const startEIA = () => {
 	loadLegos()
 	.then(legoArray => {
@@ -30,4 +41,5 @@ const startEIA = () => {
 
 }
 
+// invoking boot up function
 startEIA();
