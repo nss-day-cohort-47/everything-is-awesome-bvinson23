@@ -22,10 +22,29 @@ navElement.addEventListener("click", (event) => {
 	}
 })
 
+// event listener for filter by materials
+navElement.addEventListener("change", (event) => {
+	if (event.target.id === "materialSelector") {
+		materialFilter(event.target.value)
+	} else if (event.target.id === "showAll") {
+		makeLegoList(useLegos())
+	}
+})
+
 // function to filter for certain color legos
 const filterLegos = (whatFilter) => {
 	const filterArray = useLegos().filter(singleLego => {
 		if (singleLego.LegoName.includes(whatFilter)) {
+			return singleLego;
+		}
+	})
+	makeLegoList(filterArray);
+}
+
+// function to filter for certain materials
+const materialFilter = (whatFilter) => {
+	const filterArray = useLegos().filter(singleLego => {
+		if (singleLego.Material.includes(whatFilter)) {
 			return singleLego;
 		}
 	})
